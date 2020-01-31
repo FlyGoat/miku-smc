@@ -18,7 +18,8 @@ struct pll_level pll_levels[NUM_PLL_LEVEL] =
 	.stable_scale = (8 - 1), /* 8/8, 1650MHz */
 	.node_scale = (4 - 1), /* 4 / 8 */
 	.ht_scale = (3 - 1), /* 3 / 8 */
-	.min_time = 5000 /* 5s */
+	.min_time = 5000, /* 5s */
+	.max_temp = 120
 },{/* Normal: Max 1650MHz */
 	.refc = 2,
 	.loopc = 33,
@@ -29,7 +30,8 @@ struct pll_level pll_levels[NUM_PLL_LEVEL] =
 	.stable_scale = (8 - 1), /* 8/8, 1650MHz */
 	.node_scale = (8 - 1), /* 8 / 8 */
 	.ht_scale = (4 - 1), /* 4 / 8 */
-	.min_time = 5000 /* 5s */
+	.min_time = 5000, /* 5s */
+	.max_temp = 100
 },{/* Boost: Max 2200MHz */
 	.refc = 1,
 	.loopc = 22,
@@ -40,7 +42,8 @@ struct pll_level pll_levels[NUM_PLL_LEVEL] =
 	.stable_scale = (6 - 1), /* 6/8, 1650MHz */
 	.node_scale = (8 - 1), /* 8 / 8 */
 	.ht_scale = (4 - 1), /* 4 / 8 */
-	.min_time = 5000 /* 5s */
+	.min_time = 5000, /* 5s */
+	.max_temp = 80
 }};
 
 /* Shadow means what we tell kernel */

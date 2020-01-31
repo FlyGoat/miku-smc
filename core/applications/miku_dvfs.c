@@ -74,6 +74,7 @@ rt_err_t miku_judge_dvfs(void)
 	rt_uint16_t highest_freq = 0;
 	rt_uint8_t wanted_level = 0;
 	rt_uint32_t time = time_stamp_ms();
+	rt_int16_t temp = get_chiptemp();
 	rt_uint32_t irq_level;
 	int i;
 
@@ -98,9 +99,14 @@ rt_err_t miku_judge_dvfs(void)
 	if (wanted_level >= current_pll_level && current_pll_level != 0)
 		last_bump_up = time;
 
+	/* Check how long have we stay at current level to decide should we step down */
 	if ((time - last_bump_up) < pll_levels[current_pll_level].min_time
 		&& wanted_level < target_pll_level)
-		return RT_EOK;
+		wanted_level = target_pll_level;
+
+	/* Thermal Throttling */
+	while (pll_levels[wanted_level].max_temp < temp && wanted_level > 0)
+		wanted_level--;
 
 	irq_level = rt_hw_interrupt_disable();
 
