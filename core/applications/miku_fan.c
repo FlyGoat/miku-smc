@@ -49,7 +49,7 @@ static rt_uint8_t miku_cmd_get_fan_info(struct smc_message *msg)
 	rt_uint32_t argp = msg->arg;
 	struct  fan_info_args *arg = (struct fan_info_args*)&argp;
 
-	MIKU_DBG("Fan: get fan info id: %x, type: %x\n", arg->fan_id, arg->info_type);
+	MIKU_DBG("Fan: get fan info id: %x, type: %x", arg->fan_id, arg->info_type);
 	if (arg->fan_id >= MIKU_FAN_ID_END)
 		return MIKU_ECMDFAIL;
 	
@@ -91,7 +91,7 @@ static rt_uint8_t miku_cmd_set_fan_info(struct smc_message *msg)
 	rt_uint32_t argp = msg->arg;
 	struct  fan_info_args *arg = (struct fan_info_args*)&argp;
 
-	MIKU_DBG("Fan: set fan info id: %x, type: %x\n", arg->fan_id, arg->info_type);
+	MIKU_DBG("Fan: set fan info id: %x, type: %x", arg->fan_id, arg->info_type);
 	if (arg->fan_id >= MIKU_FAN_ID_END)
 		return MIKU_ECMDFAIL;
 	
@@ -102,7 +102,7 @@ static rt_uint8_t miku_cmd_set_fan_info(struct smc_message *msg)
 		if (!(miku_fans[arg->fan_id].flags & FAN_FLAG_MANUAL))
 			return MIKU_ECMDFAIL;
 		miku_fans[arg->fan_id].target_level = arg->val;
-		MIKU_DBG("Fan: set target level: %d\n", miku_fans[arg->fan_id].target_level);
+		MIKU_DBG("Fan: set target level: %d", miku_fans[arg->fan_id].target_level);
 	} else {
 		return MIKU_ECMDFAIL;
 	}
@@ -121,7 +121,7 @@ rt_err_t miku_enable_fan(void)
 
 static void miku_ls7a_pwm_set_level(u8 level)
 {
-	MIKU_DBG("ls7a set fan level %d\n", level);
+	MIKU_DBG("ls7a set fan level %d", level);
 	writel(255, LS7A_PWM0_FULL);
 	writel(255 - level, LS7A_PWM0_LOW);
 	writel(255, LS7A_PWM1_FULL);

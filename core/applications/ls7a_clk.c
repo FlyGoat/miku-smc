@@ -9,10 +9,11 @@
 
 rt_uint32_t time_stamp_ms(void)
 {
-	rt_uint32_t val;
+	rt_uint64_t val;
 
 	val = REG_RTC_READ;
+	val *= 1000;
+	val >>= 15;
 
-	/* Round with 32.768Khz */
-	return val / 33;
+	return val;
 }

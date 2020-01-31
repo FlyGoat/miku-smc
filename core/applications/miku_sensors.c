@@ -67,7 +67,7 @@ static rt_uint8_t miku_cmd_get_sensor_status(struct smc_message *msg)
 	rt_uint32_t argp = msg->arg;
 	struct sensor_info_args *arg = (struct sensor_info_args*)&argp;
 
-	MIKU_DBG("Sensors: get sensor status id: %x, type: %x\n", arg->sensor_id, arg->info_type);
+	MIKU_DBG("Sensors: get sensor status id: %x, type: %x", arg->sensor_id, arg->info_type);
 	if (arg->sensor_id >= MIKU_SENSOR_ID_END)
 		return MIKU_ECMDFAIL;
 	

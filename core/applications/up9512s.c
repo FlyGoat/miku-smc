@@ -42,7 +42,7 @@ static void ls_i2c_stop(void)
 void ls_i2c_init(void)
 {
 	u8 val;
-	MIKU_DBG("I2C BASE 0x%lx \n", (unsigned long)i2c_base_addr);
+	MIKU_DBG("I2C BASE 0x%lx ", (unsigned long)i2c_base_addr);
 	val = readb(i2c_base_addr + CTR_REG);
 	val &= ~0x80;
 	writeb(val, i2c_base_addr + CTR_REG);
@@ -60,13 +60,13 @@ static int ls_i2c_tx_byte(unsigned char data, unsigned char opt)
 	writeb(opt, i2c_base_addr + CR_REG);
 	while ((readb(i2c_base_addr + SR_REG) & SR_TIP) && times--);
 	if (times < 0) {
-		MIKU_DBG("ls_i2c_tx_byte SR_TIP can not ready!\n");
+		MIKU_DBG("ls_i2c_tx_byte SR_TIP can not ready!");
 		ls_i2c_stop();
 		return -1;
 	}
 
 	if (readb(i2c_base_addr + SR_REG) & SR_NOACK) {
-		MIKU_DBG("device has no ack, Pls check the hardware!\n");
+		MIKU_DBG("device has no ack, Pls check the hardware!");
 		ls_i2c_stop();
 		return -1;
 	}
@@ -168,9 +168,9 @@ void pmic_vctrl(u32 mv)
 	mv = (mv * 1000 - 210000) / 6587;
 
 	buf = mv;
-	MIKU_DBG("UPS9512s: Set VID: %d\n", buf);
+	MIKU_DBG("UPS9512s: Set VID: %d", buf);
 	if(ls_i2c_write_byte(UPI9212S_ADDR0, 0x30, &buf))
-		MIKU_DBG("write vid failed\n");
+		MIKU_DBG("write vid failed");
 
-	MIKU_DBG("VID Set Done\n");
+	MIKU_DBG("VID Set Done");
 }

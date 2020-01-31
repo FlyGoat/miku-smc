@@ -12,7 +12,7 @@ miku_func_t miku_cmd_func[MIKU_MAX_CMD];
 rt_int8_t miku_handle_unexist_cmd(struct smc_message *msg)
 {
 	msg->arg = 0x0;
-	MIKU_DBG("cmd: no such cmd\n");
+	MIKU_DBG("cmd: no such cmd");
 	return MIKU_ENOCMD;
 }
 

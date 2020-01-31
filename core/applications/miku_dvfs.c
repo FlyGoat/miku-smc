@@ -127,13 +127,13 @@ rt_err_t miku_dvfs_action(void)
 	if (current_pll_level != target_pll_level) {
 		struct pll_level *action_level = &pll_levels[target_pll_level];
 
-		MIKU_DBG("DVFS ACT: Level: %u\n", target_pll_level);
+		MIKU_DBG("DVFS ACT: Level: %u", target_pll_level);
 		ht_scale_sel(action_level->ht_scale);
 		node_scale_sel(action_level->node_scale);
 
 		if (pll_get_div() != action_level->div || pll_get_loopc() != action_level->loopc || pll_get_refc() != action_level->refc) {
 			main_pll_sel(action_level->refc, action_level->loopc, action_level->div);
-			MIKU_DBG("DVFS PLL: REFC: %u, LOOPC: %u, DIV: %u\n", action_level->refc, action_level->loopc, action_level->div);
+			MIKU_DBG("DVFS PLL: REFC: %u, LOOPC: %u, DIV: %u", action_level->refc, action_level->loopc, action_level->div);
 		}
 		current_pll_level = target_pll_level;
 		stable_scale_sel(action_level->stable_scale);
@@ -178,7 +178,7 @@ rt_uint8_t miku_get_freq_info(struct smc_message *msg)
 			return MIKU_ECMDFAIL;
 
 		freq = shadow_level_freq[lvl];
-//		MIKU_DBG("DVFS: Get Level %u, FREQ: %u\n", lvl, freq);
+//		MIKU_DBG("DVFS: Get Level %u, FREQ: %u", lvl, freq);
 		arg->info = freq;
 	} else if (arg->index == FREQ_INFO_INDEX_CORE_FREQ) {
 		if (arg->info >= NUM_CORE)
@@ -210,7 +210,7 @@ rt_uint8_t miku_set_cpu_level(struct smc_message *msg)
 		if ((1 << i) & arg->cpumask) {
 			uint16_t freq = shadow_level_freq[arg->level];
 			target_shadow_freq[i] = freq;
-//			MIKU_DBG("Setting Core %u, Shadow Freq: %u, Level %u\n", i, freq, arg->level);
+//			MIKU_DBG("Setting Core %u, Shadow Freq: %u, Level %u", i, freq, arg->level);
 		}
 	}
 
