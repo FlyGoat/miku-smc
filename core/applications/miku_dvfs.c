@@ -170,7 +170,7 @@ rt_uint8_t miku_get_freq_info(struct smc_message *msg)
 	rt_uint32_t argp = msg->arg;
 	struct freq_info_args *arg = (struct freq_info_args*)&argp;
 
-	if (arg->index == FREQ_INFO_INDEX_FREQ) {
+	if (arg->index == FREQ_INFO_INDEX_LEVEL_FREQ) {
 		rt_uint8_t lvl = arg->info;
 		rt_uint16_t freq;
 
@@ -180,6 +180,11 @@ rt_uint8_t miku_get_freq_info(struct smc_message *msg)
 		freq = shadow_level_freq[lvl];
 //		MIKU_DBG("DVFS: Get Level %u, FREQ: %u\n", lvl, freq);
 		arg->info = freq;
+	} else if (arg->index == FREQ_INFO_INDEX_CORE_FREQ) {
+		if (arg->info >= NUM_CORE)
+			return MIKU_ECMDFAIL;
+		
+		arg->info = core_current_freq(arg->info);
 	} else
 		return MIKU_ECMDFAIL;
 

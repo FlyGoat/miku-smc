@@ -64,7 +64,9 @@ struct freq_level_args {
 /* Input index and level, output info */
 #define CMD_SET_FREQ_INFO 0x8
 /* Input index and info, output none, available only with FEATURE_ADJUST_DVFS_PARAM */
-#define FREQ_INFO_INDEX_FREQ 0x0 /* Freq in MHz? */
+
+#define FREQ_INFO_INDEX_LEVEL_FREQ 0x0 /* Freq in MHz? For each shadow level */
+#define FREQ_INFO_INDEX_CORE_FREQ 0x1 /* Freq in MHz? Current frequency of each core.*/
 
 struct freq_info_args {
 	u16 info : 16;
