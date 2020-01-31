@@ -20,6 +20,7 @@ struct pll_level
 	rt_uint8_t stable_scale;
 	rt_uint8_t node_scale;
 	rt_uint8_t ht_scale;
+	rt_uint32_t sram_val;
 	rt_int8_t max_temp;
 	rt_time_t min_time; /* Minimal time to stay before step down to a lower level */
 };

@@ -136,6 +136,7 @@ rt_err_t miku_dvfs_action(void)
 		MIKU_DBG("DVFS ACT: Level: %u", target_pll_level);
 		ht_scale_sel(action_level->ht_scale);
 		node_scale_sel(action_level->node_scale);
+		HWREG32(LS3_SRAM_CTRL_REG) = action_level->sram_val;
 
 		if (pll_get_div() != action_level->div || pll_get_loopc() != action_level->loopc || pll_get_refc() != action_level->refc) {
 			main_pll_sel(action_level->refc, action_level->loopc, action_level->div);
