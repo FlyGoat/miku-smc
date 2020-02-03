@@ -39,12 +39,6 @@ enum miku_fan_ids {
 	MIKU_FAN_ID_END,
 };
 
-struct fan_info_args {
-	u16 val;
-	u8  info_type : 4;
-	u8  fan_id : 4;
-};
-
 extern rt_err_t miku_fan_init(void);
 extern rt_err_t miku_enable_fan(void);
 extern rt_err_t miku_fancontrol_decision(void);
@@ -52,12 +46,28 @@ extern rt_err_t miku_fancontrol_action(void);
 
 #define FAN_LEVEL_MAX 255
 
-/* Input sensor_id and info_type info, output none */
-#define FAN_INFO_INDEX_RPM 0x0 /* Return RPM, can not set */
-#define FAN_INFO_LEVEL 0x1 /* PWM Level, 0~255, only set with manual mode */
-#define FAN_INFO_FLAGS 0xf /* Determine Mode */
+/* Fan Control */
+#define CMD_GET_FAN_NUM 0x12
+/* Input none, output Number of fans in u4 */
+
+#define CMD_GET_FAN_INFO 0x13
+/* Input sensor_id and info_type, output info */
+#define CMD_SET_FAN_INFO 0x14
+/* Input sensor_id andinfo_type info, output none */
+#define FAN_INFO_TYPE_INDEX_RPM 0x0 /* Return RPM, can not set */
+#define FAN_INFO_TYPE_LEVEL 0x1 /* PWM Level, 0~255, only set with manual mode */
+#define FAN_INFO_TYPE_FLAGS 0xf /* Determine Mode */
+#define FAN_INFO_TYPE_NAMESTR1 0x2
+#define FAN_INFO_TYPE_NAMESTR2 0x3
+#define FAN_INFO_TYPE_NAMESTR3 0x4
+#define FAN_INFO_TYPE_NAMESTR4 0x5
 #define FAN_FLAG_AUTO (1 << 0)
 #define FAN_FLAG_MANUAL (1 << 1)
 
+struct fan_info_args {
+	u16 val;
+	u8  info_type : 4;
+	u8  fan_id : 4;
+};
 
 #endif

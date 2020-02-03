@@ -51,20 +51,20 @@ void pmic_vctrl(u32 mv);
 rt_uint32_t time_stamp_ms(void);
 
 /* Freqscale Related */
-#define CMD_GET_CPU_FREQUENCY 0x5
+#define CMD_SET_DVFS_POLICY 0x5
 /* Input CPUNum, output frequency, in MHz? */
 #define CMD_GET_FREQ_LEVELS 0x6
 /* Input none, output levels */
 struct freq_level_args {
-	u8 min_level : 8; /* reserve 0, begin with at least 1 */
+	u8 min_level : 8;
 	u8 max_normal_level : 8;
 	u8 max_boost_level : 8;
 };
 
 #define CMD_GET_FREQ_INFO 0x7
-/* Input index and level, output info */
+/* Input index and info, output info */
 #define CMD_SET_FREQ_INFO 0x8
-/* Input index and info, output none, available only with FEATURE_ADJUST_DVFS_PARAM */
+/* Input index and info, output none */
 
 #define FREQ_INFO_INDEX_LEVEL_FREQ 0x0 /* Freq in MHz? For each shadow level */
 #define FREQ_INFO_INDEX_CORE_FREQ 0x1 /* Freq in MHz? Current frequency of each core.*/
@@ -74,7 +74,7 @@ struct freq_info_args {
 	u8  index : 8;
 };
 
-#define CMD_SET_CPU_LEVEL 0x9 /* We'd better set it in a delicated mailbox to ensure eff if possible */
+#define CMD_SET_CPU_LEVEL 0x9
 /* Input cpu mask and level, output none */
 /*
  * Note: This command return as completed only means

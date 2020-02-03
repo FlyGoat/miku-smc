@@ -31,29 +31,4 @@ rt_err_t miku_cmd_install(rt_uint8_t id, miku_func_t func);
 /* To be filled */
 #define MIKU_ENOCMD	0x7f
 
-/* Below is command list */
-#define CMD_GET_VERSION 0x1
-/* Interface Version, input none, return version */
-#define CMD_GET_FEATURES 0x2
-/* Get features that SMC implemented, input index, output feature flags */
-#define CMD_GET_ENABLED_FEATURES 0x3
-/* Get currently enabled features, input index, output feature flags */
-#define CMD_SET_ENABLED_FEATURES 0x4
-/* Set features enabled state, input index and flags, output sucessfully enabled flags */
-
-/* TEMP Sensors */
-#define CMD_GET_SENSOR_NUM 0x10
-/* Input none, output Number of sensors in u4 */
-
-#define CMD_GET_SENSOR_STATUS 0x11
-/* Input sensor_id and info_type, output info */
-
-/* Fan Control */
-#define CMD_GET_FAN_NUM 0x12
-/* Input none, output Number of fans in u4 */
-
-#define CMD_GET_FAN_INFO 0x13
-/* Input sensor_id and info_type, output info */
-#define CMD_SET_FAN_INFO 0x14
-
 #endif

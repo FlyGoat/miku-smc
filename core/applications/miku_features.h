@@ -10,15 +10,26 @@
 
 void miku_features_init(void);
 
-enum miku_feature_set {
-	MIKU_FEATURE_SET_GENERAL = 0x0,
-	MIKU_FEATURE_SET_ADVANCED = 0x1,
-	MIKU_FEATURE_SET_END = 0x2,
-};
+#define CMD_GET_VERSION 0x1
+/* Interface Version, input none, return version */
+
+/* Features */
+#define CMD_GET_FEATURES 0x2
+/* Get features that SMC implemented, input index, output feature flags */
+#define CMD_GET_ENABLED_FEATURES 0x3
+/* Get currently enabled features, input index, output feature flags */
+#define CMD_SET_ENABLED_FEATURES 0x4
+/* Set features enabled state, input index and flags, output sucessfully enabled flags */
 
 struct feature_args {
 	u16 flags : 16;
 	u8  index : 8;
+};
+
+enum miku_feature_set {
+	MIKU_FEATURE_SET_GENERAL = 0x0,
+	MIKU_FEATURE_SET_ADVANCED = 0x1,
+	MIKU_FEATURE_SET_END = 0x2,
 };
 
 #define FEATURE_SET_GENERAL 0x0

@@ -53,11 +53,11 @@ static rt_uint8_t miku_cmd_get_fan_info(struct smc_message *msg)
 	if (arg->fan_id >= MIKU_FAN_ID_END)
 		return MIKU_ECMDFAIL;
 	
-	if (arg->info_type == FAN_INFO_FLAGS) {
+	if (arg->info_type == FAN_INFO_TYPE_FLAGS) {
 		arg->val = miku_fans[arg->fan_id].flags;
-	} else if (arg->info_type == FAN_INFO_INDEX_RPM) {
+	} else if (arg->info_type == FAN_INFO_TYPE_INDEX_RPM) {
 		arg->val = miku_fans[arg->fan_id].current_rpm;
-	} else if (arg->info_type == FAN_INFO_LEVEL) {
+	} else if (arg->info_type == FAN_INFO_TYPE_LEVEL) {
 		arg->val = miku_fans[arg->fan_id].current_level;
 	} else {
 		return MIKU_ECMDFAIL;
@@ -95,10 +95,10 @@ static rt_uint8_t miku_cmd_set_fan_info(struct smc_message *msg)
 	if (arg->fan_id >= MIKU_FAN_ID_END)
 		return MIKU_ECMDFAIL;
 	
-	if (arg->info_type == FAN_INFO_FLAGS) {
+	if (arg->info_type == FAN_INFO_TYPE_FLAGS) {
 		if (miku_fan_set_flags(arg->fan_id, arg->val) != RT_EOK)
 			return MIKU_ECMDFAIL;
-	} else if (arg->info_type == FAN_INFO_LEVEL) {
+	} else if (arg->info_type == FAN_INFO_TYPE_LEVEL) {
 		if (!(miku_fans[arg->fan_id].flags & FAN_FLAG_MANUAL))
 			return MIKU_ECMDFAIL;
 		miku_fans[arg->fan_id].target_level = arg->val;
