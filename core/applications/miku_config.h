@@ -14,4 +14,7 @@
 #define MIKU_FAN_HAVE_PACKAGE	1
 #define MIKU_HAVE_DVFS		1
 
+#define MIKU_DVFS_POLICY_2200	1
+//#define MIKU_DVFS_POLICY_2000	1
+
 #endif
