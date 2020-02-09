@@ -1,0 +1,23 @@
+language: c
+dist: bionic
+addons:
+  apt:
+    packages:
+    - scons
+    - libc6:i386
+    - libncurses5:i386
+    - libstdc++6:i386
+    - lib32z1
+
+before_script:
+  - wget https://github.com/RT-Thread/toolchains-ci/releases/download/v1.1/mips-2016.05-7-mips-sde-elf-i686-pc-linux-gnu.tar.bz2
+  - sudo tar -xvjf mips-2016.05-7-mips-sde-elf-i686-pc-linux-gnu.tar.bz2 -C /opt/
+  - sudo chmod -R 0777 /opt/mips-2016.05
+  - export PATH=$PATH:/opt/mips-2016.05/bin
+  - export RTT_EXEC_PAT=/opt/mips-2016.05/bin
+  - ls /opt/mips-2016.05/bin/
+  - /opt/mips-2016.05/bin/mips-sde-elf-gcc -v
+
+script:
+  - cd core
+  - scons
