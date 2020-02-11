@@ -6,8 +6,6 @@
 #ifndef _MIKU_FEATURES_H__
 #define _MIKU_FEATURES_H__
 
-#include <mips.h>
-
 void miku_features_init(void);
 
 #define CMD_GET_VERSION 0x1

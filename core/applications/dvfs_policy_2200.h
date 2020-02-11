@@ -3,15 +3,21 @@
  * Copyright (C) 2019, 2020 Jiaxun Yang <jiaxun.yang@flygoat.com>
  */
 
-#include "miku.h"
+#define BASEFREQ	1650
+#define BOOT_VID	1150
+#define BOOT_DIV	1
+#define BOOT_LOOPC	33
+#define BOOT_REFC	2
+#define BOOSTFREQ	2200
 
+#if defined(MIKU_INDVFS) && !defined(__ASSEMBLY__)
 #define NUM_PLL_LEVEL	3
 
 struct pll_level pll_levels[NUM_PLL_LEVEL] = 
 {{/* Idle: Max 825MHz */
-	.refc = 2,
-	.loopc = 33,
-	.div = 1,
+	.refc = BOOT_REFC,
+	.loopc = BOOT_LOOPC,
+	.div = BOOT_DIV,
 	.vid = 1000, /* FIXME: Low down it later */
 	.highest_scale = (4 - 1), /* 4 / 8 */
 	.lowest_scale = 0, /* 1 / 8 */
@@ -22,10 +28,10 @@ struct pll_level pll_levels[NUM_PLL_LEVEL] =
 	.max_temp = 120,
 	.sram_val = 0x1f156f
 },{/* Normal: Max 1650MHz */
-	.refc = 2,
-	.loopc = 33,
-	.div = 1,
-	.vid = 1150,
+	.refc = BOOT_REFC,
+	.loopc = BOOT_LOOPC,
+	.div = BOOT_DIV,
+	.vid = BOOT_VID,
 	.highest_scale = (8 - 1), /* 8 / 8 */
 	.lowest_scale = (5 - 1), /* 5 / 8 */
 	.stable_scale = (8 - 1), /* 8/8, 1650MHz */
@@ -53,5 +59,6 @@ struct pll_level pll_levels[NUM_PLL_LEVEL] =
 #define SHADOW_LEVEL_NUM	10
 #define BASEFREQ_SHADOW_LEVEL	7
 #define BASEFREQ	1650
-rt_uint16_t	shadow_level_freq[SHADOW_LEVEL_NUM] = {200, 410, 618, 825, 1030, 1237, 1443, BASEFREQ, 1925, 2200};
+rt_uint16_t	shadow_level_freq[SHADOW_LEVEL_NUM] = {200, 410, 618, 825, 1030, 1237, 1443, BASEFREQ, 1925, BOOSTFREQ};
 rt_uint32_t	core_scale_min = 3000;
+#endif

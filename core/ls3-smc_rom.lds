@@ -23,6 +23,8 @@ SECTIONS
     .text : 
     {
 	*(.start);
+	. = ALIGN(0x800);
+     	KEEP(*(.config_table))
         . = ALIGN(0x1000);	
 	__ebase_entry = .;
      	KEEP(*(.exc_vectors))

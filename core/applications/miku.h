@@ -9,13 +9,13 @@
 #include <rtthread.h>
 #include <mips.h>
 #include <ls3-smc.h>
+#include "miku_dvfs.h"
 #include "miku_config.h"
 #include "miku_cmd.h"
 #include "miku_features.h"
 #include "miku_sensors.h"
 #include "miku_threads.h"
 #include "miku_fan.h"
-#include "miku_dvfs.h"
 
 #ifdef MIKU_DEBUG
 #define DBG_TAG               "Miku"

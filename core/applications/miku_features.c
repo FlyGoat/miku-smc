@@ -5,8 +5,6 @@
 
 #include "miku.h"
 
-#define MIKU_CURRENT_VERSION 0x1
-
 static rt_uint32_t implemented_feature[MIKU_FEATURE_SET_END];
 static rt_uint32_t enabled_feature[MIKU_FEATURE_SET_END];
 

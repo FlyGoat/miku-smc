@@ -3,15 +3,8 @@
  * Copyright (C) 2019, 2020 Jiaxun Yang <jiaxun.yang@flygoat.com>
  */
 
+#define MIKU_INDVFS	1
 #include "miku.h"
-
-#if defined(MIKU_DVFS_POLICY_2200)
-#include "dvfs_policy_2200.h"
-#elif defined(MIKU_DVFS_POLICY_2000)
-#include "dvfs_policy_2200.h"
-#else
-#error "No DVFS policy supplied"
-#endif
 
 rt_uint16_t	target_shadow_freq[NUM_CORE];
 rt_uint8_t	current_core_scale[NUM_CORE];
